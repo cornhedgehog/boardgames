@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <span class="logo">Логин</span>
+            <span class="user">
+            {% if request.user.is_authenticated %}
+                Привет, {{ request.user.first_name }},
+                <a href="{% url "logout" %}">Выйти из аккаунта</a>
+            {% else %}
+                <a href="{% url "login" %}">Войти в аккаунт</a>
+            {% endif %}
+            </span>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
